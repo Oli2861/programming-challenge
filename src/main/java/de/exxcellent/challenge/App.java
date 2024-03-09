@@ -26,7 +26,6 @@ public final class App {
         String footballPath = basePath + "football.csv";
 
         System.out.printf("Day with smallest temperature spread : %s%n", getDayWithSmallestTemperatureSpread(weatherPath));
-
         System.out.printf("Team with smallest goal spread       : %s%n", getTeamWithSmallestGoalSpread(footballPath));
     }
 
@@ -51,7 +50,22 @@ public final class App {
     }
 
     private static String getTeamWithSmallestGoalSpread(String path) {
-        return "";
+        DataFrameReader csvReader = new CSVReader();
+        DataFrame footballDataFrame = csvReader.readDataFrame(path);
+
+        List<Float> difference = footballDataFrame.applyOperationToColumns(
+                "Goals",
+                "Goals Allowed",
+                (goals, goalsAllowed) -> Float.parseFloat(goals) - Float.parseFloat(goals)
+        );
+
+        Optional<Float> min = difference.stream().min(Float::compareTo);
+        if (min.isPresent()) {
+            int idx = difference.indexOf(min.get());
+            return footballDataFrame.getColumn("Team").get(idx);
+        }
+
+        throw new IllegalStateException("Failed to find the team with the smallest goal spread. Might be due to an empty DataFrame or incorrect column names.");
     }
 
 }
