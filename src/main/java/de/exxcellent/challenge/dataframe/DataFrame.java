@@ -84,6 +84,10 @@ public class DataFrame {
         return -1;
     }
 
+    /**
+     * Get a String representation of the DataFrame.
+     * @return The String representation.
+     */
     @Override
     public String toString() {
         String delimiter = "|";
@@ -102,6 +106,12 @@ public class DataFrame {
         return sb.toString();
     }
 
+    /**
+     * Represent the row of the DataFrame as a String.
+     * @param row The row to get a readable string of.
+     * @param maxLength The length to pad each cell to. This is useful to represent the whole DataFrame in a pretty format.
+     * @return A string representation of the row.
+     */
     private String rowToString(String[] row, int maxLength) {
         String delimiter = "|";
         StringBuilder sb = new StringBuilder();
@@ -113,6 +123,11 @@ public class DataFrame {
         return sb.toString();
     }
 
+    /**
+     * Determine the length of the longest item in a row.
+     * @param row The row.
+     * @return The length of the longest item in the row.
+     */
     private int maxLengthOfRow(String[] row) {
         int maxLength = 0;
         for (String s : row) {
@@ -122,5 +137,12 @@ public class DataFrame {
         return maxLength;
     }
 
+    public String[] getColumnNames() {
+        return this.columnNames;
+    }
+
+    public int getRowCount() {
+        return this.rows.size();
+    }
 
 }
