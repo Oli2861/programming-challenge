@@ -76,7 +76,7 @@ public class DataFrame {
      * @param name The name of the column.
      * @return The index of the column.
      */
-    private int getIndexOfColumnName(String name) {
+    public int getIndexOfColumnName(String name) {
         for (int i = 0; i < columnNames.length; i++) {
             if (name.equals(columnNames[i]))
                 return i;
