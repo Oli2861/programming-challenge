@@ -1,5 +1,9 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.dataframe.CSVReader;
+import de.exxcellent.challenge.dataframe.DataFrame;
+import de.exxcellent.challenge.dataframe.DataFrameReader;
+
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
  * design. Read: create your own classes and packages as appropriate.
@@ -15,6 +19,14 @@ public final class App {
     public static void main(String... args) {
 
         // Your preparation code …
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        String basePath = "./src/main/resources/de/exxcellent/challenge/";
+        String weatherFile = basePath + "weather.csv";
+        String football = basePath + "football.csv";
+
+        DataFrameReader csvReader = new CSVReader();
+        DataFrame weatherDataFrame = csvReader.readDataFrame(weatherFile);
+        System.out.println(weatherDataFrame.toString());
 
         String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
